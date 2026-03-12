@@ -23,19 +23,48 @@ document.addEventListener('DOMContentLoaded', () => {
  * Inicjalizuje aplikację i nasłuchiwacze zdarzeń
  */
 function initializeApp() {
+    console.log('=== initializeApp called ===');
     const fileInput = document.getElementById('file-input');
     const uploadArea = document.getElementById('upload-area');
+    const uploadBtn = document.getElementById('upload-btn');
+    
+    console.log('fileInput element:', fileInput);
+    console.log('uploadArea element:', uploadArea);
+    console.log('uploadBtn element:', uploadBtn);
+
+    if (!fileInput) {
+        console.error('FILE INPUT NOT FOUND!');
+        return;
+    }
+    
+    if (!uploadArea) {
+        console.error('UPLOAD AREA NOT FOUND!');
+        return;
+    }
+    
+    if (!uploadBtn) {
+        console.error('UPLOAD BUTTON NOT FOUND!');
+        return;
+    }
+
+    // Obsługa kliknięcia przycisku
+    console.log('Adding click event listener to uploadBtn');
+    uploadBtn.addEventListener('click', () => {
+        console.log('Upload button clicked!');
+        fileInput.click();
+    });
 
     // Obsługa wyboru pliku
+    console.log('Adding change event listener to fileInput');
     fileInput.addEventListener('change', handleFileSelect);
 
     // Obsługa drag & drop
+    console.log('Adding drag & drop event listeners');
     uploadArea.addEventListener('dragover', handleDragOver);
     uploadArea.addEventListener('dragleave', handleDragLeave);
     uploadArea.addEventListener('drop', handleDrop);
-    uploadArea.addEventListener('click', () => fileInput.click());
 
-    console.log('XML WebUI Editor initialized');
+    console.log('XML WebUI Editor initialized successfully');
 }
 
 // ===== Obsługa plików =====
@@ -81,10 +110,14 @@ function handleDrop(e) {
  * Obsługuje wybór pliku przez input
  */
 function handleFileSelect(e) {
+    console.log('handleFileSelect called', e);
     const file = e.target.files[0];
+    console.log('Selected file:', file);
     if (file && isValidXMLFile(file)) {
+        console.log('File is valid XML, reading...');
         readXMLFile(file);
     } else {
+        console.log('Invalid file');
         showMessage('Proszę wybrać prawidłowy plik XML', 'error');
     }
 }
@@ -100,13 +133,16 @@ function isValidXMLFile(file) {
  * Odczytuje zawartość pliku XML
  */
 function readXMLFile(file) {
+    console.log('readXMLFile called with:', file);
     AppState.originalFileName = file.name;
     
     const reader = new FileReader();
     
     reader.onload = (e) => {
+        console.log('File loaded, parsing...');
         try {
             const xmlText = e.target.result;
+            console.log('XML text length:', xmlText.length);
             parseAndDisplayXML(xmlText);
             showMessage(`Plik "${file.name}" został wczytany pomyślnie`, 'success');
         } catch (error) {
@@ -116,9 +152,11 @@ function readXMLFile(file) {
     };
     
     reader.onerror = () => {
+        console.error('FileReader error');
         showMessage('Błąd odczytu pliku', 'error');
     };
     
+    console.log('Starting to read file...');
     reader.readAsText(file);
 }
 
@@ -128,29 +166,36 @@ function readXMLFile(file) {
  * Parsuje XML i wyświetla w edytorze
  */
 function parseAndDisplayXML(xmlText) {
+    console.log('parseAndDisplayXML called');
     try {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        console.log('XML parsed, checking for errors...');
         
         // Sprawdź czy wystąpiły błędy parsowania
         const parserError = xmlDoc.querySelector('parsererror');
         if (parserError) {
+            console.error('Parser error found:', parserError);
             throw new Error('Nieprawidłowy format XML');
         }
         
+        console.log('No parser errors, saving to AppState');
         AppState.xmlDocument = xmlDoc;
         AppState.nodeMap.clear();
         
+        console.log('Switching to editor section');
         // Pokaż sekcję edytora
-        document.getElementById('upload-section').classList.add('hidden');
-        document.getElementById('editor-section').classList.remove('hidden');
+        document.getElementById('upload-section').style.display = 'none';
+        document.getElementById('editor-section').style.display = 'block';
         
-        // Wyświetl nazwę pliku
-        document.getElementById('file-name').textContent = `📄 ${AppState.originalFileName}`;
-        document.getElementById('file-info').classList.remove('hidden');
+        console.log('Updating file info');
+        // Wyświetl nawę pliku
+        document.getElementById('file-name-display').textContent = AppState.originalFileName;
         
+        console.log('Building tree view');
         // Zbuduj widok drzewa
         buildTreeView();
+        console.log('Tree view built successfully');
         
     } catch (error) {
         console.error('Error parsing XML:', error);
@@ -162,12 +207,17 @@ function parseAndDisplayXML(xmlText) {
  * Buduje widok drzewa XML
  */
 function buildTreeView() {
+    console.log('buildTreeView called');
     const treeView = document.getElementById('tree-view');
+    console.log('tree-view element:', treeView);
     treeView.innerHTML = '';
     
     const rootElement = AppState.xmlDocument.documentElement;
+    console.log('Root element:', rootElement);
     const treeNode = createTreeNode(rootElement, 0);
+    console.log('Tree node created:', treeNode);
     treeView.appendChild(treeNode);
+    console.log('Tree node appended to treeView');
 }
 
 /**
@@ -312,7 +362,7 @@ function displayEditPanel() {
     const xmlNode = AppState.selectedNode.xmlNode;
     
     if (!xmlNode) {
-        editPanel.innerHTML = '<div class="edit-panel-empty"><p>Wybierz element do edycji</p></div>';
+        editPanel.innerHTML = '<p class="placeholder-message">Kliknij na element po lewej stronie, aby go edytować</p>';
         return;
     }
     
@@ -572,9 +622,9 @@ function resetEditor() {
     AppState.selectedNode = null;
     AppState.nodeMap.clear();
     
-    document.getElementById('upload-section').classList.remove('hidden');
-    document.getElementById('editor-section').classList.add('hidden');
-    document.getElementById('file-info').classList.add('hidden');
+    document.getElementById('upload-section').style.display = 'block';
+    document.getElementById('editor-section').style.display = 'none';
+    document.getElementById('file-name-display').textContent = '';
     document.getElementById('file-input').value = '';
     
     showMessage('Edytor został zresetowany', 'info');

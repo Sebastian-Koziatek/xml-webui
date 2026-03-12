@@ -3,69 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XML Editor - Prosty edytor plików XML</title>
+    <title>Edytor Plików XML</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📝 Edytor Plików XML</h1>
+            <h1>Edytor Plików XML</h1>
             <p class="subtitle">Prosty i intuicyjny edytor dla każdego</p>
         </header>
 
         <main>
             <!-- Sekcja wczytywania pliku -->
-            <section id="upload-section" class="section">
+            <section id="upload-section" class="upload-section">
                 <div class="upload-area" id="upload-area">
-                    <div class="upload-icon">📁</div>
-                    <h2>Wybierz plik XML do edycji</h2>
-                    <p>Przeciągnij plik tutaj lub kliknij, aby wybrać</p>
-                    <input type="file" id="file-input" accept=".xml" hidden>
-                    <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">
-                        Wybierz Plik
+                    <div class="upload-icon">📄</div>
+                    <h2>Wybierz plik XML</h2>
+                    <p>Przeciągnij plik tutaj lub kliknij przycisk poniżej</p>
+                    <input type="file" id="file-input" accept=".xml">
+                    <button class="btn btn-primary" id="upload-btn">
+                        Wybierz plik
                     </button>
-                </div>
-                <div id="file-info" class="file-info hidden">
-                    <span id="file-name"></span>
-                    <button class="btn btn-secondary" onclick="resetEditor()">Wczytaj Inny Plik</button>
                 </div>
             </section>
 
             <!-- Sekcja edycji -->
-            <section id="editor-section" class="section hidden">
+            <section id="editor-section" class="editor-section">
                 <div class="editor-header">
-                    <h2>✏️ Edycja Zawartości</h2>
+                    <div>
+                        <h2 class="editor-title">Edycja</h2>
+                        <p class="file-name" id="file-name-display"></p>
+                    </div>
                     <div class="editor-actions">
-                        <button class="btn btn-success" onclick="downloadXML()">
-                            💾 Pobierz Zmieniony Plik
-                        </button>
                         <button class="btn btn-secondary" onclick="resetEditor()">
-                            🔄 Zacznij Od Nowa
+                            Zacznij od nowa
+                        </button>
+                        <button class="btn btn-success" onclick="downloadXML()">
+                            Pobierz plik
                         </button>
                     </div>
                 </div>
 
-                <div class="editor-container">
+                <div class="editor-grid">
                     <!-- Widok drzewa XML -->
                     <div class="tree-view" id="tree-view"></div>
                     
                     <!-- Panel edycji wybranego elementu -->
                     <div class="edit-panel" id="edit-panel">
-                        <div class="edit-panel-empty">
-                            <p>👆 Kliknij na element po lewej stronie, aby go edytować</p>
-                        </div>
+                        <p class="placeholder-message">Kliknij na element po lewej stronie, aby go edytować</p>
                     </div>
                 </div>
             </section>
-
-            <!-- Komunikaty dla użytkownika -->
-            <div id="message-container"></div>
         </main>
 
         <footer>
-            <p>XML WebUI Editor | Wersja 1.0</p>
+            <p>XML WebUI Editor · Wersja 1.0</p>
         </footer>
     </div>
+
+    <!-- Komunikaty dla użytkownika -->
+    <div class="message-container" id="message-container"></div>
 
     <script src="app.js"></script>
 </body>

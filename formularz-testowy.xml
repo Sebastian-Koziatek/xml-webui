@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formularz typ="rekrutacyjny" wersja="2.1" data-utworzenia="2024-03-12" id-formularza="FORM-2024-001">
+    <metadata>
+        <autor>Sebastian Koziatek</autor>
+        <organizacja nazwa="TechCorp Poland" nip="1234567890">
+            <adres>
+                <ulica>ul. Marszałkowska</ulica>
+                <numer-budynku>123</numer-budynku>
+                <numer-lokalu>45</numer-lokalu>
+                <kod-pocztowy>00-001</kod-pocztowy>
+                <miasto>Warszawa</miasto>
+                <wojewodztwo>mazowieckie</wojewodztwo>
+                <kraj kod="PL">Polska</kraj>
+            </adres>
+            <kontakt>
+                <telefon typ="stacjonarny" preferowany="tak">+48 22 123 45 67</telefon>
+                <telefon typ="komorkowy" preferowany="nie">+48 500 123 456</telefon>
+                <email typ="glowny">hr@techcorp.pl</email>
+                <email typ="zapasowy">rekrutacja@techcorp.pl</email>
+                <strona-www>https://www.techcorp.pl</strona-www>
+            </kontakt>
+        </organizacja>
+        <cel-formularza>Rekrutacja na stanowisko Senior Software Engineer</cel-formularza>
+        <czas-wypelnienia jednostka="minuty">45</czas-wypelnienia>
+    </metadata>
+
+    <sekcja id="dane-osobowe" wymagana="tak" priorytet="1">
+        <tytul>Dane Osobowe Kandydata</tytul>
+        <opis>Prosimy o podanie podstawowych informacji osobowych</opis>
+        
+        <pole id="imie" typ="text" wymagane="tak" min-dlugosc="2" max-dlugosc="50">
+            <etykieta>Imię</etykieta>
+            <wartosc>Jan</wartosc>
+            <walidacja pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+" komunikat="Tylko litery"/>
+        </pole>
+        
+        <pole id="nazwisko" typ="text" wymagane="tak" min-dlugosc="2" max-dlugosc="100">
+            <etykieta>Nazwisko</etykieta>
+            <wartosc>Kowalski</wartosc>
+            <walidacja pattern="[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż\-\s]+" komunikat="Tylko litery, myślniki i spacje"/>
+        </pole>
+        
+        <pole id="data-urodzenia" typ="date" wymagane="tak" min="1950-01-01" max="2006-12-31">
+            <etykieta>Data urodzenia</etykieta>
+            <wartosc>1990-05-15</wartosc>
+            <podpowiedz>Kandydat musi mieć ukończone 18 lat</podpowiedz>
+        </pole>
+        
+        <pole id="pesel" typ="text" wymagane="tak" dlugosc="11">
+            <etykieta>PESEL</etykieta>
+            <wartosc>90051512345</wartosc>
+            <walidacja pattern="\d{11}" komunikat="PESEL musi składać się z 11 cyfr"/>
+        </pole>
+        
+        <pole id="plec" typ="select" wymagane="tak">
+            <etykieta>Płeć</etykieta>
+            <wartosc>M</wartosc>
+            <opcje>
+                <opcja wartosc="M" etykieta="Mężczyzna"/>
+                <opcja wartosc="K" etykieta="Kobieta"/>
+                <opcja wartosc="I" etykieta="Inna"/>
+                <opcja wartosc="N" etykieta="Nie chcę podawać"/>
+            </opcje>
+        </pole>
+        
+        <pole id="obywatelstwo" typ="multiselect" wymagane="tak" max-wybor="3">
+            <etykieta>Obywatelstwo</etykieta>
+            <wartosci>
+                <wartosc>PL</wartosc>
+                <wartosc>DE</wartosc>
+            </wartosci>
+            <opcje>
+                <opcja wartosc="PL" etykieta="Polskie"/>
+                <opcja wartosc="DE" etykieta="Niemieckie"/>
+                <opcja wartosc="GB" etykieta="Brytyjskie"/>
+                <opcja wartosc="US" etykieta="Amerykańskie"/>
+                <opcja wartosc="UA" etykieta="Ukraińskie"/>
+                <opcja wartosc="FR" etykieta="Francuskie"/>
+            </opcje>
+        </pole>
+    </sekcja>
+
+    <sekcja id="adres-zamieszkania" wymagana="tak" priorytet="2">
+        <tytul>Adres Zamieszkania</tytul>
+        
+        <pole id="ulica" typ="text" wymagane="tak" max-dlugosc="100">
+            <etykieta>Ulica</etykieta>
+            <wartosc>ul. Nowa</wartosc>
+        </pole>
+        
+        <pole id="nr-domu" typ="text" wymagane="tak" max-dlugosc="10">
+            <etykieta>Numer domu</etykieta>
+            <wartosc>45A</wartosc>
+        </pole>
+        
+        <pole id="nr-mieszkania" typ="text" wymagane="nie" max-dlugosc="10">
+            <etykieta>Numer mieszkania</etykieta>
+            <wartosc>12</wartosc>
+        </pole>
+        
+        <pole id="kod-pocztowy" typ="text" wymagane="tak" pattern="\d{2}-\d{3}">
+            <etykieta>Kod pocztowy</etykieta>
+            <wartosc>00-123</wartosc>
+            <walidacja pattern="\d{2}-\d{3}" komunikat="Format: XX-XXX"/>
+        </pole>
+        
+        <pole id="miasto" typ="text" wymagane="tak" max-dlugosc="100">
+            <etykieta>Miasto</etykieta>
+            <wartosc>Warszawa</wartosc>
+        </pole>
+        
+        <pole id="wojewodztwo" typ="select" wymagane="tak">
+            <etykieta>Województwo</etykieta>
+            <wartosc>mazowieckie</wartosc>
+            <opcje>
+                <opcja wartosc="dolnoslaskie" etykieta="Dolnośląskie"/>
+                <opcja wartosc="kujawsko-pomorskie" etykieta="Kujawsko-pomorskie"/>
+                <opcja wartosc="lubelskie" etykieta="Lubelskie"/>
+                <opcja wartosc="lubuskie" etykieta="Lubuskie"/>
+                <opcja wartosc="lodzkie" etykieta="Łódzkie"/>
+                <opcja wartosc="malopolskie" etykieta="Małopolskie"/>
+                <opcja wartosc="mazowieckie" etykieta="Mazowieckie"/>
+                <opcja wartosc="opolskie" etykieta="Opolskie"/>
+                <opcja wartosc="podkarpackie" etykieta="Podkarpackie"/>
+                <opcja wartosc="podlaskie" etykieta="Podlaskie"/>
+                <opcja wartosc="pomorskie" etykieta="Pomorskie"/>
+                <opcja wartosc="slaskie" etykieta="Śląskie"/>
+                <opcja wartosc="swietokrzyskie" etykieta="Świętokrzyskie"/>
+                <opcja wartosc="warminsko-mazurskie" etykieta="Warmińsko-mazurskie"/>
+                <opcja wartosc="wielkopolskie" etykieta="Wielkopolskie"/>
+                <opcja wartosc="zachodniopomorskie" etykieta="Zachodniopomorskie"/>
+            </opcje>
+        </pole>
+    </sekcja>
+
+    <sekcja id="kontakt" wymagana="tak" priorytet="3">
+        <tytul>Dane Kontaktowe</tytul>
+        
+        <pole id="email" typ="email" wymagane="tak" max-dlugosc="100">
+            <etykieta>Email</etykieta>
+            <wartosc>jan.kowalski@example.com</wartosc>
+            <walidacja pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" komunikat="Nieprawidłowy format email"/>
+        </pole>
+        
+        <pole id="email-zapasowy" typ="email" wymagane="nie" max-dlugosc="100">
+            <etykieta>Email zapasowy</etykieta>
+            <wartosc>j.kowalski@gmail.com</wartosc>
+        </pole>
+        
+        <pole id="telefon" typ="tel" wymagane="tak" pattern="\+48\s?\d{3}\s?\d{3}\s?\d{3}">
+            <etykieta>Numer telefonu</etykieta>
+            <wartosc>+48 500 123 456</wartosc>
+            <walidacja pattern="\+48\s?\d{3}\s?\d{3}\s?\d{3}" komunikat="Format: +48 XXX XXX XXX"/>
+        </pole>
+        
+        <pole id="linkedin" typ="url" wymagane="nie" max-dlugosc="200">
+            <etykieta>Profil LinkedIn</etykieta>
+            <wartosc>https://www.linkedin.com/in/jan-kowalski</wartosc>
+        </pole>
+        
+        <pole id="github" typ="url" wymagane="nie" max-dlugosc="200">
+            <etykieta>Profil GitHub</etykieta>
+            <wartosc>https://github.com/jkowalski</wartosc>
+        </pole>
+        
+        <pole id="portfolio" typ="url" wymagane="nie" max-dlugosc="200">
+            <etykieta>Portfolio / Strona WWW</etykieta>
+            <wartosc>https://jankowalski.dev</wartosc>
+        </pole>
+    </sekcja>
+
+    <sekcja id="wyksztalcenie" wymagana="tak" priorytet="4">
+        <tytul>Wykształcenie</tytul>
+        
+        <wyksztalcenie id="wyk-1" typ="wyzsze" stopien="magisterskie" weryfikacja="tak">
+            <uczelnia>
+                <nazwa>Politechnika Warszawska</nazwa>
+                <wydzial>Wydział Elektroniki i Technik Informacyjnych</wydzial>
+                <kierunek>Informatyka</kierunek>
+                <specjalizacja>Systemy rozproszone i aplikacje internetowe</specjalizacja>
+                <tryb>stacjonarne</tryb>
+            </uczelnia>
+            <okres>
+                <data-rozpoczecia>2013-10-01</data-rozpoczecia>
+                <data-zakonczenia>2018-06-30</data-zakonczenia>
+                <ukonczono>tak</ukonczono>
+            </okres>
+            <dyplom>
+                <tytul>Magister inżynier</tytul>
+                <temat-pracy>Optymalizacja systemów rozproszonych z wykorzystaniem technologii kontenerowych</temat-pracy>
+                <ocena>5.0</ocena>
+                <wyroznienia>
+                    <wyroznienie>Praca dyplomowa nagrodzona w konkursie IEEE</wyroznienie>
+                    <wyroznienie>Stypendium rektora za wyniki w nauce</wyroznienie>
+                </wyroznienia>
+            </dyplom>
+        </wyksztalcenie>
+        
+        <wyksztalcenie id="wyk-2" typ="srednie" stopien="technikum" weryfikacja="tak">
+            <szkola>
+                <nazwa>Technikum Informatyczne nr 5</nazwa>
+                <miejscowosc>Warszawa</miejscowosc>
+                <profil>Technik informatyk</profil>
+            </szkola>
+            <okres>
+                <data-rozpoczecia>2009-09-01</data-rozpoczecia>
+                <data-zakonczenia>2013-06-30</data-zakonczenia>
+                <ukonczono>tak</ukonczono>
+            </okres>
+            <dyplom>
+                <tytul>Technik informatyk</tytul>
+                <ocena>4.8</ocena>
+                <kwalifikacje>
+                    <kwalifikacja kod="INF.02">Administracja i eksploatacja systemów komputerowych</kwalifikacja>
+                    <kwalifikacja kod="INF.03">Tworzenie i administrowanie stronami i aplikacjami internetowymi</kwalifikacja>
+                </kwalifikacje>
+            </dyplom>
+        </wyksztalcenie>
+    </sekcja>
+
+    <sekcja id="doswiadczenie-zawodowe" wymagana="tak" priorytet="5">
+        <tytul>Doświadczenie Zawodowe</tytul>
+        
+        <praca id="praca-1" aktualnie-zatrudniony="tak">
+            <pracodawca>
+                <nazwa>TechSolutions Sp. z o.o.</nazwa>
+                <branża>IT / Software development</branża>
+                <wielkosc>250-500 pracowników</wielkosc>
+                <lokalizacja>
+                    <miasto>Warszawa</miasto>
+                    <kraj>Polska</kraj>
+                </lokalizacja>
+            </pracodawca>
+            <stanowisko>
+                <nazwa>Senior Software Engineer</nazwa>
+                <poziom>senior</poziom>
+                <typ-umowy>umowa o pracę</typ-umowy>
+                <wymiar-czasu>pełny etat</wymiar-czasu>
+                <tryb-pracy>hybrydowy</tryb-pracy>
+            </stanowisko>
+            <okres>
+                <data-rozpoczecia>2020-03-01</data-rozpoczecia>
+                <data-zakonczenia aktualnie="tak">obecnie</data-zakonczenia>
+                <staż>4 lata</staż>
+            </okres>
+            <obowiazki>
+                <obowiazek>Projektowanie i implementacja aplikacji webowych w JavaScript (React, Node.js)</obowiazek>
+                <obowiazek>Mentoring junior developerów i code review</obowiazek>
+                <obowiazek>Uczestnictwo w planowaniu architektury systemów</obowiazek>
+                <obowiazek>Wdrażanie praktyk CI/CD i automatyzacji testów</obowiazek>
+                <obowiazek>Współpraca z zespołami międzynarodowymi (US, UK, DE)</obowiazek>
+            </obowiazki>
+            <technologie>
+                <technologia kategoria="frontend">React.js</technologia>
+                <technologia kategoria="frontend">TypeScript</technologia>
+                <technologia kategoria="frontend">Redux</technologia>
+                <technologia kategoria="backend">Node.js</technologia>
+                <technologia kategoria="backend">Express.js</technologia>
+                <technologia kategoria="backend">PostgreSQL</technologia>
+                <technologia kategoria="devops">Docker</technologia>
+                <technologia kategoria="devops">Kubernetes</technologia>
+                <technologia kategoria="devops">Jenkins</technologia>
+                <technologia kategoria="cloud">AWS</technologia>
+                <technologia kategoria="narzedzia">Git</technologia>
+                <technologia kategoria="narzedzia">JIRA</technologia>
+            </technologie>
+            <osiagniecia>
+                <osiagniecie>Przeprojektowanie głównej aplikacji, co poprawiło wydajność o 40%</osiagniecie>
+                <osiagniecie>Wprowadzenie automatyzacji testów, pokrycie kodu wzrosło z 30% do 85%</osiagniecie>
+                <osiagniecie>Mentoring 5 junior developerów, 3 awansowało na mid-level</osiagniecie>
+            </osiagniecia>
+        </praca>
+        
+        <praca id="praca-2" aktualnie-zatrudniony="nie">
+            <pracodawca>
+                <nazwa>WebDev Agency</nazwa>
+                <branża>IT / Agencja interaktywna</branża>
+                <wielkosc>50-100 pracowników</wielkosc>
+                <lokalizacja>
+                    <miasto>Kraków</miasto>
+                    <kraj>Polska</kraj>
+                </lokalizacja>
+            </pracodawca>
+            <stanowisko>
+                <nazwa>Junior Software Developer</nazwa>
+                <poziom>junior</poziom>
+                <typ-umowy>umowa o pracę</typ-umowy>
+                <wymiar-czasu>pełny etat</wymiar-czasu>
+                <tryb-pracy>stacjonarny</tryb-pracy>
+            </stanowisko>
+            <okres>
+                <data-rozpoczecia>2018-08-01</data-rozpoczecia>
+                <data-zakonczenia>2020-02-28</data-zakonczenia>
+                <staż>1 rok 7 miesięcy</staż>
+            </okres>
+            <obowiazki>
+                <obowiazek>Tworzenie responsywnych stron internetowych</obowiazek>
+                <obowiazek>Implementacja funkcjonalności w JavaScript</obowiazek>
+                <obowiazek>Współpraca z zespołem UX/UI designerów</obowiazek>
+                <obowiazek>Utrzymanie istniejących projektów klientów</obowiazek>
+            </obowiazki>
+            <technologie>
+                <technologia kategoria="frontend">HTML5</technologia>
+                <technologia kategoria="frontend">CSS3</technologia>
+                <technologia kategoria="frontend">JavaScript (ES6)</technologia>
+                <technologia kategoria="frontend">jQuery</technologia>
+                <technologia kategoria="backend">PHP</technologia>
+                <technologia kategoria="backend">WordPress</technologia>
+                <technologia kategoria="narzedzia">Git</technologia>
+                <technologia kategoria="narzedzia">SVN</technologia>
+            </technologie>
+            <powod-odejscia>Chęć rozwoju w kierunku full-stack developera i pracy z nowoczesnymi technologiami</powod-odejscia>
+        </praca>
+        
+        <praca id="praca-3" aktualnie-zatrudniony="nie">
+            <pracodawca>
+                <nazwa>Freelance</nazwa>
+                <branża>Własna działalność</branża>
+                <wielkosc>1 osoba</wielkosc>
+            </pracodawca>
+            <stanowisko>
+                <nazwa>Web Developer - Freelancer</nazwa>
+                <poziom>mid</poziom>
+                <typ-umowy>własna działalność gospodarcza</typ-umowy>
+                <wymiar-czasu>część etatu</wymiar-czasu>
+                <tryb-pracy>zdalny</tryb-pracy>
+            </stanowisko>
+            <okres>
+                <data-rozpoczecia>2017-01-01</data-rozpoczecia>
+                <data-zakonczenia>2018-07-31</data-zakonczenia>
+                <staż>1 rok 7 miesięcy</staż>
+            </okres>
+            <obowiazki>
+                <obowiazek>Realizacja projektów webowych dla małych firm i startupów</obowiazek>
+                <obowiazek>Konsultacje techniczne i doradztwo IT</obowiazek>
+                <obowiazek>Utrzymanie i rozwój aplikacji webowych</obowiazek>
+            </obowiazki>
+            <projekty-realizowane>15</projekty-realizowane>
+            <uwagi>Praca równolegle ze studiami</uwagi>
+        </praca>
+    </sekcja>
+
+    <sekcja id="umiejetnosci" wymagana="tak" priorytet="6">
+        <tytul>Umiejętności Techniczne</tytul>
+        
+        <kategoria nazwa="Języki programowania">
+            <umiejetnosc nazwa="JavaScript" poziom="expert" lata-doswiadczenia="6">
+                <szczegoly>ES6+, async/await, promises, closures, prototypes</szczegoly>
+                <certyfikaty>
+                    <certyfikat>JavaScript Developer Certificate - W3C</certyfikat>
+                </certyfikaty>
+            </umiejetnosc>
+            <umiejetnosc nazwa="TypeScript" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Typy zaawansowane, generics, decorators</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Python" poziom="intermediate" lata-doswiadczenia="3">
+                <szczegoly>Django, Flask, data processing, automation scripts</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Java" poziom="intermediate" lata-doswiadczenia="2">
+                <szczegoly>Spring Boot, Maven</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="SQL" poziom="advanced" lata-doswiadczenia="5">
+                <szczegoly>PostgreSQL, MySQL, optymalizacja zapytań</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+        
+        <kategoria nazwa="Frontend">
+            <umiejetnosc nazwa="React.js" poziom="expert" lata-doswiadczenia="5">
+                <szczegoly>Hooks, Context API, Redux, React Router, Server Components</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Next.js" poziom="advanced" lata-doswiadczenia="2">
+                <szczegoly>SSR, SSG, API Routes, App Router</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Vue.js" poziom="intermediate" lata-doswiadczenia="1">
+                <szczegoly>Composition API, Vuex</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="HTML5/CSS3" poziom="expert" lata-doswiadczenia="6">
+                <szczegoly>Semantic HTML, Flexbox, Grid, Animations</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Sass/SCSS" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Variables, mixins, extends, modules</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+        
+        <kategoria nazwa="Backend">
+            <umiejetnosc nazwa="Node.js" poziom="expert" lata-doswiadczenia="5">
+                <szczegoly>Express.js, NestJS, streams, buffers, event loop</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="RESTful API" poziom="expert" lata-doswiadczenia="5">
+                <szczegoly>Design patterns, versioning, documentation</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="GraphQL" poziom="intermediate" lata-doswiadczenia="2">
+                <szczegoly>Apollo Server, schema design, resolvers</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="WebSockets" poziom="intermediate" lata-doswiadczenia="2">
+                <szczegoly>Socket.io, real-time communication</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+        
+        <kategoria nazwa="Bazy danych">
+            <umiejetnosc nazwa="PostgreSQL" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Indeksy, transakcje, stored procedures, replikacja</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="MongoDB" poziom="intermediate" lata-doswiadczenia="3">
+                <szczegoly>Aggregation pipeline, indexing, sharding</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Redis" poziom="intermediate" lata-doswiadczenia="2">
+                <szczegoly>Caching, pub/sub, sessions</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="MySQL" poziom="intermediate" lata-doswiadczenia="3">
+                <szczegoly>Query optimization, indexes, transactions</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+        
+        <kategoria nazwa="DevOps i Cloud">
+            <umiejetnosc nazwa="Docker" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Dockerfile, docker-compose, multi-stage builds</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Kubernetes" poziom="intermediate" lata-doswiadczenia="2">
+                <szczegoly>Deployments, services, ingress, helm</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="AWS" poziom="intermediate" lata-doswiadczenia="3">
+                <szczegoly>EC2, S3, Lambda, RDS, CloudFront</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="CI/CD" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Jenkins, GitHub Actions, GitLab CI</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Linux" poziom="advanced" lata-doswiadczenia="5">
+                <szczegoly>Ubuntu, CentOS, bash scripting, system administration</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+        
+        <kategoria nazwa="Narzędzia i metodyki">
+            <umiejetnosc nazwa="Git" poziom="expert" lata-doswiadczenia="6">
+                <szczegoly>Branching strategies, rebasing, cherry-pick</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Agile/Scrum" poziom="advanced" lata-doswiadczenia="4">
+                <szczegoly>Sprint planning, daily standups, retrospectives</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="Test-Driven Development" poziom="advanced" lata-doswiadczenia="3">
+                <szczegoly>Jest, Mocha, Chai, unit testing, integration testing</szczegoly>
+            </umiejetnosc>
+            <umiejetnosc nazwa="REST API Design" poziom="expert" lata-doswiadczenia="5">
+                <szczegoly>OpenAPI, Swagger, API versioning</szczegoly>
+            </umiejetnosc>
+        </kategoria>
+    </sekcja>
+
+    <sekcja id="jezyki-obce" wymagana="tak" priorytet="7">
+        <tytul>Języki Obce</tytul>
+        
+        <jezyk kod="pl" ojczysty="tak">
+            <nazwa>Polski</nazwa>
+            <poziom skala="CEF">Native</poziom>
+            <umiejetnosci>
+                <umiejetnosc typ="mowienie" poziom="C2">Biegły</umiejetnosc>
+                <umiejetnosc typ="pisanie" poziom="C2">Biegły</umiejetnosc>
+                <umiejetnosc typ="czytanie" poziom="C2">Biegły</umiejetnosc>
+                <umiejetnosc typ="rozumienie" poziom="C2">Biegły</umiejetnosc>
+            </umiejetnosci>
+        </jezyk>
+        
+        <jezyk kod="en" ojczysty="nie">
+            <nazwa>Angielski</nazwa>
+            <poziom skala="CEF">C1</poziom>
+            <umiejetnosci>
+                <umiejetnosc typ="mowienie" poziom="C1">Zaawansowany</umiejetnosc>
+                <umiejetnosc typ="pisanie" poziom="C1">Zaawansowany</umiejetnosc>
+                <umiejetnosc typ="czytanie" poziom="C2">Biegły</umiejetnosc>
+                <umiejetnosc typ="rozumienie" poziom="C1">Zaawansowany</umiejetnosc>
+            </umiejetnosci>
+            <certyfikaty>
+                <certyfikat nazwa="IELTS" wynik="7.5" data="2019-06-15" waznosc-do="2021-06-15"/>
+                <certyfikat nazwa="TOEIC" wynik="950/990" data="2020-03-10" waznosc-do="2022-03-10"/>
+            </certyfikaty>
+            <doswiadczenie>Codzienna komunikacja w środowisku międzynarodowym, prowadzenie prezentacji technicznych</doswiadczenie>
+        </jezyk>
+        
+        <jezyk kod="de" ojczysty="nie">
+            <nazwa>Niemiecki</nazwa>
+            <poziom skala="CEF">B1</poziom>
+            <umiejetnosci>
+                <umiejetnosc typ="mowienie" poziom="B1">Średnio zaawansowany</umiejetnosc>
+                <umiejetnosc typ="pisanie" poziom="A2">Podstawowy</umiejetnosc>
+                <umiejetnosc typ="czytanie" poziom="B1">Średnio zaawansowany</umiejetnosc>
+                <umiejetnosc typ="rozumienie" poziom="B1">Średnio zaawansowany</umiejetnosc>
+            </umiejetnosci>
+            <certyfikaty>
+                <certyfikat nazwa="Goethe-Zertifikat B1" data="2021-09-20"/>
+            </certyfikaty>
+            <doswiadczenie>Komunikacja z klientami z Niemiec, czytanie dokumentacji technicznej</doswiadczenie>
+        </jezyk>
+    </sekcja>
+
+    <sekcja id="szkolenia-certyfikaty" wymagana="nie" priorytet="8">
+        <tytul>Szkolenia i Certyfikaty</tytul>
+        
+        <certyfikat id="cert-1" typ="profesjonalny" aktualny="tak">
+            <nazwa>AWS Certified Solutions Architect - Associate</nazwa>
+            <wystawca>Amazon Web Services</wystawca>
+            <data-uzyskania>2022-11-15</data-uzyskania>
+            <data-waznosci>2025-11-15</data-waznosci>
+            <numer-certyfikatu>AWS-CSA-2022-12345</numer-certyfikatu>
+            <weryfikacja-url>https://aws.amazon.com/verify/cert-12345</weryfikacja-url>
+        </certyfikat>
+        
+        <certyfikat id="cert-2" typ="profesjonalny" aktualny="tak">
+            <nazwa>Professional Scrum Master I (PSM I)</nazwa>
+            <wystawca>Scrum.org</wystawca>
+            <data-uzyskania>2021-03-10</data-uzyskania>
+            <bezterminowy>tak</bezterminowy>
+            <numer-certyfikatu>PSM-2021-67890</numer-certyfikatu>
+        </certyfikat>
+        
+        <szkolenie id="szk-1" ukonczone="tak">
+            <nazwa>Advanced React Patterns</nazwa>
+            <organizator>Frontend Masters</organizator>
+            <forma>online</forma>
+            <czas-trwania jednostka="godziny">8</czas-trwania>
+            <data-ukonczenia>2023-05-20</data-ukonczenia>
+            <zakres>
+                <umiejetnosc>Compound Components</umiejetnosc>
+                <umiejetnosc>Render Props</umiejetnosc>
+                <umiejetnosc>Higher Order Components</umiejetnosc>
+                <umiejetnosc>Custom Hooks</umiejetnosc>
+            </zakres>
+        </szkolenie>
+        
+        <szkolenie id="szk-2" ukonczone="tak">
+            <nazwa>Kubernetes for Developers</nazwa>
+            <organizator>Linux Foundation</organizator>
+            <forma>online</forma>
+            <czas-trwania jednostka="godziny">40</czas-trwania>
+            <data-ukonczenia>2022-08-15</data-ukonczenia>
+            <zakres>
+                <umiejetnosc>Deploying applications in Kubernetes</umiejetnosc>
+                <umiejetnosc>Managing containerized applications</umiejetnosc>
+                <umiejetnosc>Helm charts</umiejetnosc>
+            </zakres>
+        </szkolenie>
+        
+        <szkolenie id="szk-3" ukonczone="tak">
+            <nazwa>Clean Code and Software Craftsmanship</nazwa>
+            <organizator>Uncle Bob Training</organizator>
+            <forma>warsztat stacjonarny</forma>
+            <czas-trwania jednostka="dni">3</czas-trwania>
+            <data-ukonczenia>2021-11-10</data-ukonczenia>
+            <zakres>
+                <umiejetnosc>SOLID principles</umiejetnosc>
+                <umiejetnosc>Design patterns</umiejetnosc>
+                <umiejetnosc>Refactoring techniques</umiejetnosc>
+                <umiejetnosc>Test-Driven Development</umiejetnosc>
+            </zakres>
+        </szkolenie>
+    </sekcja>
+
+    <sekcja id="zainteresowania-hobby" wymagana="nie" priorytet="9">
+        <tytul>Zainteresowania i Hobby</tytul>
+        
+        <zainteresowanie kategoria="technologia">
+            <nazwa>Open Source Contributions</nazwa>
+            <opis>Aktywny kontrybutor do projektów open source na GitHub. Utrzymuję własne biblioteki npm używane przez ponad 1000 developerów.</opis>
+            <projekty>
+                <projekt nazwa="react-advanced-form" rola="maintainer" gwiazdki="1250"/>
+                <projekt nazwa="nodejs-cache-manager" rola="contributor" gwiazdki="3400"/>
+            </projekty>
+        </zainteresowanie>
+        
+        <zainteresowanie kategoria="edukacja">
+            <nazwa>Blogging Techniczny</nazwa>
+            <opis>Prowadzę blog techniczny o programowaniu webowym, średnio 10K odsłon miesięcznie.</opis>
+            <url>https://devblog.jankowalski.dev</url>
+            <liczba-artykulow>45</liczba-artykulow>
+        </zainteresowanie>
+        
+        <zainteresowanie kategoria="sport">
+            <nazwa>Bieganie</nazwa>
+            <opis>Regularne treningi biegowe, udział w półmaratonach.</opis>
+            <osiagniecia>
+                <osiagniecie>Półmaraton Warszawski 2023 - czas 1:45:23</osiagniecie>
+                <osiagniecie>Bieg Nocny Wrocław 2022 - 3 miejsce w kategorii</osiagniecie>
+            </osiagniecia>
+        </zainteresowanie>
+        
+        <zainteresowanie kategoria="rozwoj-osobisty">
+            <nazwa>Mentoring</nazwa>
+            <opis>Volunteer mentor w programach dla początkujących programistów (CoderDojo, RailsGirls).</opis>
+            <godziny-wolontariatu rocznie="48">48h rocznie</godziny-wolontariatu>
+        </zainteresowanie>
+    </sekcja>
+
+    <sekcja id="preferencje-zawodowe" wymagana="tak" priorytet="10">
+        <tytul>Preferencje Zawodowe</tytul>
+        
+        <pole id="oczekiwane-wynagrodzenie" typ="number" wymagane="tak" jednostka="PLN brutto">
+            <etykieta>Oczekiwane wynagrodzenie miesięczne</etykieta>
+            <wartosc>18000</wartosc>
+            <zakres min="15000" max="25000"/>
+            <uwagi>do negocjacji, w zależności od oferowanych benefitów</uwagi>
+        </pole>
+        
+        <pole id="forma-wspolpracy" typ="multiselect" wymagane="tak">
+            <etykieta>Preferowane formy współpracy</etykieta>
+            <wartosci>
+                <wartosc>umowa-o-prace</wartosc>
+                <wartosc>b2b</wartosc>
+            </wartosci>
+            <opcje>
+                <opcja wartosc="umowa-o-prace" etykieta="Umowa o pracę"/>
+                <opcja wartosc="b2b" etykieta="Kontrakt B2B"/>
+                <opcja wartosc="umowa-zlecenie" etykieta="Umowa zlecenie"/>
+            </opcje>
+        </pole>
+        
+        <pole id="tryb-pracy" typ="multiselect" wymagane="tak">
+            <etykieta>Preferowany tryb pracy</etykieta>
+            <wartosci>
+                <wartosc>hybrydowy</wartosc>
+                <wartosc>zdalny</wartosc>
+            </wartosci>
+            <opcje>
+                <opcja wartosc="zdalny" etykieta="100% zdalnie"/>
+                <opcja wartosc="hybrydowy" etykieta="Hybrydowo (biuro + zdalne)"/>
+                <opcja wartosc="stacjonarny" etykieta="Stacjonarnie"/>
+            </opcje>
+        </pole>
+        
+        <pole id="data-rozpoczecia" typ="date" wymagane="tak">
+            <etykieta>Możliwa data rozpoczęcia pracy</etykieta>
+            <wartosc>2024-05-01</wartosc>
+            <okres-wypowiedzenia jednostka="miesiecy">3</okres-wypowiedzenia>
+        </pole>
+        
+        <pole id="gotowosci-relocacja" typ="radio" wymagane="tak">
+            <etykieta>Gotowość do relokacji</etykieta>
+            <wartosc>nie</wartosc>
+            <opcje>
+                <opcja wartosc="tak" etykieta="Tak"/>
+                <opcja wartosc="nie" etykieta="Nie"/>
+                <opcja wartosc="zalezne" etykieta="Zależne od warunków"/>
+            </opcje>
+        </pole>
+        
+        <pole id="gotowosci-delegacje" typ="radio" wymagane="tak">
+            <etykieta>Gotowość do delegacji</etykieta>
+            <wartosc>tak</wartosc>
+            <opcje>
+                <opcja wartosc="tak" etykieta="Tak"/>
+                <opcja wartosc="nie" etykieta="Nie"/>
+                <opcja wartosc="okazjonalnie" etykieta="Okazjonalnie"/>
+            </opcje>
+            <uwagi>Maksymalnie 20% czasu pracy</uwagi>
+        </pole>
+    </sekcja>
+
+    <sekcja id="zgody-oswiadczenia" wymagana="tak" priorytet="11">
+        <tytul>Zgody i Oświadczenia</tytul>
+        
+        <zgoda id="zgoda-1" wymagana="tak" typ="obligatoryjna">
+            <tresc>Oświadczam, że wszystkie podane przeze mnie informacje są prawdziwe i zgodne z aktualnym stanem faktycznym.</tresc>
+            <stan>zaakceptowana</stan>
+            <data-akceptacji>2024-03-12T10:30:00</data-akceptacji>
+        </zgoda>
+        
+        <zgoda id="zgoda-2" wymagana="tak" typ="obligatoryjna">
+            <tresc>Wyrażam zgodę na przetwarzanie moich danych osobowych zawartych w ofercie pracy dla potrzeb niezbędnych do realizacji procesu rekrutacji zgodnie z ustawą z dnia 10 maja 2018 roku o ochronie danych osobowych (Dz. Ustaw z 2018, poz. 1000) oraz zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).</tresc>
+            <stan>zaakceptowana</stan>
+            <data-akceptacji>2024-03-12T10:30:00</data-akceptacji>
+        </zgoda>
+        
+        <zgoda id="zgoda-3" wymagana="nie" typ="marketingowa">
+            <tresc>Wyrażam zgodę na przetwarzanie moich danych osobowych dla celów przyszłych rekrutacji.</tresc>
+            <stan>zaakceptowana</stan>
+            <data-akceptacji>2024-03-12T10:30:00</data-akceptacji>
+            <okres-waznosci jednostka="miesiecy">12</okres-waznosci>
+        </zgoda>
+        
+        <zgoda id="zgoda-4" wymagana="nie" typ="marketingowa">
+            <tresc>Wyrażam zgodę na kontakt telefoniczny oraz mailowy w sprawie ofert pracy.</tresc>
+            <stan>zaakceptowana</stan>
+            <data-akceptacji>2024-03-12T10:30:00</data-akceptacji>
+        </zgoda>
+    </sekcja>
+
+    <zalaczniki>
+        <zalacznik id="zal-1" typ="cv" wymagany="tak" format="pdf" rozmiar="245678">
+            <nazwa-pliku>Jan_Kowalski_CV.pdf</nazwa-pliku>
+            <sciezka>/uploads/2024/03/cv_jan_kowalski.pdf</sciezka>
+            <data-przeslania>2024-03-12T10:15:00</data-przeslania>
+            <hash-md5>d41d8cd98f00b204e9800998ecf8427e</hash-md5>
+        </zalacznik>
+        
+        <zalacznik id="zal-2" typ="list-motywacyjny" wymagany="nie" format="pdf" rozmiar="156789">
+            <nazwa-pliku>List_Motywacyjny_Jan_Kowalski.pdf</nazwa-pliku>
+            <sciezka>/uploads/2024/03/lm_jan_kowalski.pdf</sciezka>
+            <data-przeslania>2024-03-12T10:16:00</data-przeslania>
+            <hash-md5>098f6bcd4621d373cade4e832627b4f6</hash-md5>
+        </zalacznik>
+        
+        <zalacznik id="zal-3" typ="portfolio" wymagany="nie" format="pdf" rozmiar="1245678">
+            <nazwa-pliku>Portfolio_Jan_Kowalski.pdf</nazwa-pliku>
+            <sciezka>/uploads/2024/03/portfolio_jan_kowalski.pdf</sciezka>
+            <data-przeslania>2024-03-12T10:17:00</data-przeslania>
+            <hash-md5>098f6bcd4621d373cade4e832627b4f6</hash-md5>
+        </zalacznik>
+    </zalaczniki>
+
+    <metadane-formularza>
+        <status>wyslany</status>
+        <data-rozpoczecia>2024-03-12T09:45:00</data-rozpoczecia>
+        <data-zakonczenia>2024-03-12T10:30:00</data-zakonczenia>
+        <czas-wypelniania jednostka="minuty">45</czas-wypelniania>
+        <liczba-zapisow-tymczasowych>12</liczba-zapisow-tymczasowych>
+        <ip-address>192.168.1.100</ip-address>
+        <user-agent>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36</user-agent>
+        <wersja-formularza>2.1</wersja-formularza>
+        <identyfikator-sesji>sess_abc123xyz789</identyfikator-sesji>
+    </metadane-formularza>
+</formularz>
