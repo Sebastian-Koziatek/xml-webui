@@ -11,18 +11,23 @@
 - **Wybór pliku**: Kliknij przycisk i wybierz plik z systemu plików
 - **Walidacja**: Automatyczna weryfikacja poprawności formatu XML
 
-### 2. Wizualizacja Struktury
-- **Widok drzewa**: Hierarchiczna prezentacja struktury XML
-- **Rozwijanie/zwijanie**: Interaktywna nawigacja po zagnieżdżonych elementach
-- **Podgląd wartości**: Wyświetlanie zawartości tekstowej bezpośrednio w drzewie
+### 2. Inteligentny Podgląd Formularza
+- **Automatyczne formatowanie**: XML jest prezentowany jako czytelny formularz
+- **Grupowanie sekcji**: Elementy są automatycznie grupowane według struktury
+- **Czytelne etykiety**: Nazwy tagów są formatowane do postaci czytelnej (np. `imie_nazwisko` → `Imie nazwisko`)
+- **Hierarchiczna prezentacja**: Zachowanie logicznej struktury dokumentu
+- **Podgląd wartości**: Wszystkie wartości wyświetlone w przystępnej formie
 
-### 3. Edycja Elementów
+### 3. Intuicyjna Edycja
+- **Kliknij i edytuj**: Kliknij wartość po lewej stronie, edytuj po prawej
+- **Panel edycji kontekstowy**: Automatyczne dopasowanie formularza do typu elementu
 - **Edycja tekstu**: Modyfikacja zawartości tekstowej elementów
 - **Zarządzanie atrybutami**: 
   - Edycja nazw i wartości atrybutów
   - Dodawanie nowych atrybutów
   - Usuwanie istniejących atrybutów
-- **Automatyczne aktualizacje**: Zmiany są natychmiast widoczne w widoku drzewa
+- **Automatyczne aktualizacje**: Zmiany są natychmiast widoczne w podglądzie
+- **Przewijanie do elementu**: Po wybraniu pola, automatyczne przewinięcie do edytowanego elementu
 
 ### 4. Pobieranie Pliku
 - **Export**: Pobierz zmodyfikowany plik XML
@@ -68,43 +73,66 @@
 
 1. Otwórz aplikację w przeglądarce
 2. Użyj jednej z metod wczytania pliku:
-   - **Przeciągnij i upuść**: Przeciągnij plik XML na obszar oznaczony ikoną 📁
-   - **Kliknięcie**: Kliknij przycisk "Wybierz Plik" i wybierz plik z dysku
+   - **Przeciągnij i upuść**: Przeciągnij plik XML na obszar oznaczony ikoną �
+   - **Kliknięcie**: Kliknij przycisk "Wybierz plik" i wybierz plik z dysku
 
-### Krok 2: Nawigacja po Strukturze
+### Krok 2: Przeglądanie Podglądu Formularza
 
-1. Po wczytaniu pliku zobaczysz strukturę XML w formie drzewa po lewej stronie
-2. Elementy z dziećmi mają strzałkę (▼/▶):
-   - **▼** - element rozwinięty
-   - **▶** - element zwinięty
-3. Kliknij strzałkę, aby rozwinąć lub zwinąć element
-4. Elementy bez dzieci mają kropkę (•)
+1. Po wczytaniu pliku zobaczysz podgląd formularza po lewej stronie ekranu
+2. Elementy są wyświetlone jako pary **etykieta → wartość**:
+   - **Etykiety**: Nazwy pól z XML, automatycznie sformatowane
+   - **Wartości**: Aktualna zawartość każdego pola
+3. Sekcje są pogrupowane według struktury XML:
+   - **Tytuły sekcji**: Wyróżnione większą czcionką
+   - **Pola**: Zgrupowane logicznie według struktury dokumentu
+4. Przewijaj listę aby zobaczyć wszystkie pola
 
-### Krok 3: Edycja Elementów
+### Krok 3: Edycja Wartości
 
-1. Kliknij na dowolny element w drzewie po lewej stronie
-2. Po prawej stronie pojawi się panel edycji z:
-   - **Zawartością tekstową**: Edytuj tekst wewnątrz elementu
-   - **Atrybutami**: Modyfikuj istniejące atrybuty lub dodaj nowe
-3. Zmiany są zapisywane automatycznie po wprowadzeniu
-4. Widok drzewa aktualizuje się dynamicznie
+1. **Kliknij na dowolną wartość** po lewej stronie ekranu
+2. Pole zostanie podświetlone i automatycznie przewinie się do widoku
+3. Po prawej stronie pojawi się panel edycji z:
+   - **Nazwą elementu**: Informacja o edytowanym polu
+   - **Polem edycji**: Wprowadź nową wartość
+   - **Atrybutami** (jeśli istnieją): Lista wszystkich atrybutów elementu
+4. Wprowadź zmiany w polu tekstowym lub textarea
+5. Zmiany są zapisywane automatycznie po opuszczeniu pola
+6. Podgląd po lewej stronie aktualizuje się natychmiast
 
 ### Krok 4: Zarządzanie Atrybutami
 
-- **Edycja**: Zmień nazwę lub wartość atrybutu bezpośrednio w polach
-- **Dodawanie**: Kliknij przycisk "+ Dodaj Atrybut"
+- **Edycja atrybutu**: Kliknij wartość atrybutu w podglądzie lub edytuj w panelu prawym
+- **Dodawanie**: Przewiń panel edycji w dół i kliknij przycisk "+ Dodaj Atrybut"
 - **Usuwanie**: Kliknij przycisk "✕" obok atrybutu, który chcesz usunąć
+- Zmiany w atrybutach również są widoczne od razu w podglądzie
 
 ### Krok 5: Pobieranie Zmodyfikowanego Pliku
 
-1. Kliknij przycisk "💾 Pobierz Zmieniony Plik" w prawym górnym rogu
+1. Kliknij przycisk "Pobierz plik" w prawym górnym rogu
 2. Plik zostanie automatycznie pobrany do domyślnego folderu pobierania
-3. Zachowana zostanie oryginalna nazwa pliku
+3. Zachowana zostanie oryginalna nazwa pliku z zachowaniem wszystkich zmian
 
 ### Resetowanie
 
-- Kliknij przycisk "🔄 Zacznij Od Nowa", aby wczytać nowy plik
+- Kliknij przycisk "Zacznij od nowa", aby wczytać nowy plik
 - Bieżące zmiany nie zostaną zapisane, chyba że wcześniej pobierzesz plik
+
+## 💡 Przykład Użycia
+
+### Scenariusz: Edycja formularza rekrutacyjnego
+
+1. **Wczytaj plik** `formularz-kandydata.xml` zawierający dane kandydata
+2. **Przeglądaj sekcje** w podglądzie:
+   - Dane osobowe (imię, nazwisko, email)
+   - Adres (ulica, miasto, kod pocztowy)
+   - Wykształcenie (uczelnia, kierunek, rok)
+   - Doświadczenie zawodowe (firma, stanowisko, opis)
+3. **Kliknij na pole "Email"** po lewej stronie
+4. **Zmień wartość** w panelu edycji po prawej na nowy adres email
+5. **Kliknij na pole "Opis doświadczenia"**
+6. **Rozbuduj opis** w dużym polu textarea
+7. **Pobierz plik** z aktualnymi danymi
+8. Gotowe! Plik XML został zaktualizowany
 
 ## 🏗️ Architektura Aplikacji
 
@@ -131,10 +159,17 @@ xml-webui/
 
 #### 2. **styles.css** - Warstwa Stylizacji
 - **CSS Custom Properties**: Centralne zarządzanie kolorami i wartościami
-- **Flexbox & Grid**: Nowoczesny layout
+- **Apple Design System**: Minimalistyczny, elegancki design inspirowany macOS/iOS
 - **Responsive Design**: Automatyczne dostosowanie do urządzeń mobilnych
-- **Animacje**: Płynne przejścia i interakcje
+- **Subtelne animacje**: Płynne przejścia i micro-interactions
 - **Accessibility**: Wysoki kontrast i czytelne czcionki
+
+**Kluczowe komponenty stylów:**
+- `.preview-section`: Grupowanie logicznych sekcji formularza
+- `.preview-field`: Pojedyncze pole formularza (etykieta + wartość)
+- `.preview-label`: Czytelna etykieta pola (uppercase, mniejsza czcionka)
+- `.preview-value`: Wartość pola z odpowiednim formatowaniem
+- `.edit-panel`: Panel edycji z reaktywnym layoutem
 
 #### 3. **app.js** - Warstwa Logiki
 Główne moduły funkcjonalne:
@@ -157,14 +192,31 @@ const AppState = {
 
 ##### **Moduł Parsowania XML**
 - `parseAndDisplayXML()` - parsowanie tekstu XML
-- `buildTreeView()` - budowanie widoku drzewa
-- `createTreeNode()` - rekurencyjne tworzenie węzłów
+- `buildPreview()` - budowanie inteligentnego podglądu formularza
+- `processElementForPreview()` - rekurencyjne przetwarzanie struktury XML
+- `createPreviewField()` - tworzenie pól podglądu dla elementów
+- `createPreviewFieldForAttribute()` - tworzenie pól dla atrybutów
+- `formatLabel()` - automatyczne formatowanie etykiet (camelCase → Camel case)
+
+**Logika budowania podglądu:**
+1. Analiza struktury XML i identyfikacja sekcji
+2. Grupowanie powtarzających się elementów
+3. Formatowanie etykiet do postaci czytelnej
+4. Tworzenie hierarchii sekcji i pól
+5. Przypisywanie unikalnych identyfikatorów (UID) do każdego pola
 
 ##### **Moduł Edycji**
-- `selectNode()` - wybór węzła do edycji
-- `displayEditPanel()` - wyświetlanie panelu edycji
-- `updateNodeTextContent()` - modyfikacja zawartości
-- `updateAttribute*()` - zarządzanie atrybutami
+- `selectNode()` - wybór pola do edycji (element lub atrybut)
+- `displayEditPanel()` - wyświetlanie panelu edycji z kontekstem
+- `updateNodeTextContent()` - modyfikacja zawartości z auto-refresh
+- `updateAttribute*()` - zarządzanie atrybutami z walidacją
+- `createFormGroup()` - dynamiczne tworzenie formularzy edycji
+
+**Funkcje pomocnicze edycji:**
+- Automatyczne przewijanie do wybranego elementu
+- Podświetlanie aktywnego pola w podglądzie
+- Odświeżanie podglądu po każdej zmianie
+- Obsługa zarówno elementów jak i atrybutów
 
 ##### **Moduł Eksportu**
 - `downloadXML()` - generowanie i pobieranie pliku
@@ -212,30 +264,181 @@ const AppState = {
   - Single column dla mobile/tablet
   - Touch-friendly kontrolki
 
+#### 6. **Inteligentny Podgląd Formularza**
+- **Uzasadnienie**: Użytkownicy nietechniczni potrzebują czytelnego interfejsu, a nie surowego drzewa XML
+- **Implementacja**:
+  - Automatyczna analiza struktury XML i identyfikacja wzorców
+  - Grupowanie logicznych sekcji (np. wszystkie elementy tego samego typu)
+  - Formatowanie etykiet (transformacja nazw tagów na czytelne etykiety)
+  - Hierarchiczne wyświetlanie zagnieżdżonych struktur
+- **Zalety**:
+  - Intuicyjny interfejs przypominający formularz
+  - Łatwe odnalezienie konkretnego pola
+  - Szybka edycja bez znajomości struktury XML
+  - Idealne dla formularzy, ankiet, konfiguracji
+
+### Jak Działa System Podglądu Formularza
+
+#### Proces Budowania Podglądu
+
+1. **Parsowanie XML**
+   ```javascript
+   const xmlDoc = new DOMParser().parseFromString(xmlText, 'text/xml');
+   ```
+
+2. **Analiza Struktury**
+   - Rekurencyjne przetwarzanie elementów od korzenia
+   - Identyfikacja elementów liści (zawierających wartości tekstowe)
+   - Wykrywanie powtarzających się struktur (listy elementów)
+   - Grupowanie atrybutów
+
+3. **Formatowanie Etykiet**
+   ```javascript
+   formatLabel("imie_nazwisko") → "Imie nazwisko"
+   formatLabel("dataUrodzenia") → "Data urodzenia"
+   formatLabel("email-address") → "Email address"
+   ```
+
+4. **Tworzenie Hierarchii Sekcji**
+   - Główne sekcje (pierwszy poziom zagnieżdżenia)
+   - Podsekcje (kolejne poziomy)
+   - Pola końcowe (elementy z wartościami)
+
+5. **Mapowanie do DOM**
+   - Każde pole otrzymuje unikalny UID
+   - Mapowanie UID → węzeł XML dla szybkiego dostępu
+   - Dodanie event listenerów do każdego pola
+
+#### Przykład Transformacji
+
+**XML wejściowy:**
+```xml
+<formularz>
+  <daneOsobowe>
+    <imie>Jan</imie>
+    <nazwisko>Kowalski</nazwisko>
+    <email>jan@example.com</email>
+  </daneOsobowe>
+  <adres>
+    <ulica>Główna 1</ulica>
+    <miasto>Warszawa</miasto>
+  </adres>
+</formularz>
+```
+
+**Podgląd wygenerowany:**
+```
+┌─ Dane osobowe ─────────────┐
+│ IMIĘ                       │
+│ Jan                        │
+│                            │
+│ NAZWISKO                   │
+│ Kowalski                   │
+│                            │
+│ EMAIL                      │
+│ jan@example.com            │
+└────────────────────────────┘
+
+┌─ Adres ────────────────────┐
+│ ULICA                      │
+│ Główna 1                   │
+│                            │
+│ MIASTO                     │
+│ Warszawa                   │
+└────────────────────────────┘
+```
+
+#### Interakcja Użytkownika
+
+1. **Kliknięcie na pole** → `selectNode(uid)`
+2. **Wyszukanie węzła** → `nodeMap.get(uid)`
+3. **Podświetlenie** → dodanie klasy `.selected`
+4. **Przewinięcie** → `scrollIntoView({ behavior: 'smooth' })`
+5. **Wyświetlenie edytora** → `displayEditPanel()`
+6. **Aktualizacja wartości** → modyfikacja DOM XML
+7. **Odświeżenie podglądu** → `buildPreview()`
+
 ## 🎨 Interfejs Użytkownika
 
+### Design System - Apple Inspired
+
+**Filozofia projektowa:**
+- Minimalizm i czytelność
+- Subtelne animacje i przejścia
+- Przestrzeń oddechowa (generous whitespace)
+- Hierarchia typograficzna
+- Konsystentne zaokrąglenia i cienie
+
 ### Paleta Kolorów
-- **Primary**: `#4CAF50` (zielony) - akcje pozytywne, sukces
-- **Secondary**: `#2196F3` (niebieski) - akcje neutralne
-- **Gradient**: `#667eea` → `#764ba2` (fioletowy) - tło aplikacji
+- **Primary**: `#007AFF` (niebieski systemu iOS) - akcje podstawowe
+- **Success**: `#34C759` (zielony) - akcje pozytywne, sukces
+- **Danger**: `#FF3B30` (czerwony) - akcje destruktywne
+- **Text**: `#000000` / `#8E8E93` - tekst główny / pomocniczy
+- **Background**: `#FFFFFF` / `#F5F5F7` - tło główne / pomocnicze
+- **Separator**: `rgba(60, 60, 67, 0.12)` - linie rozdzielające
 
 ### Typografia
-- **Font Family**: System fonts (-apple-system, Segoe UI, Roboto)
-- **Font Sizes**: Skalowane od 1rem do 2.5rem
-- **Line Height**: 1.6 dla optymalnej czytelności
+- **Font Family**: `-apple-system, BlinkMacSystemFont, 'SF Pro Display'`
+- **Rozmiary**: 
+  - H1: 48px (tytuł główny)
+  - H2: 32px (tytuły sekcji)
+  - H3: 22px (tytuły paneli)
+  - Body: 17px (tekst główny)
+  - Label: 13px (etykiety)
+  - Small: 12px (tekst pomocniczy)
+- **Line Height**: 1.47059 (Apple standard)
+- **Letter Spacing**: -0.022em (optical tracking)
 
 ### Komponenty UI
 
 #### Przyciski
-- **Primary** - główne akcje (wybór pliku)
-- **Secondary** - akcje pomocnicze (reset)
-- **Success** - akcje zapisu (pobierz plik)
-- **Remove** - akcje usuwania (usuń atrybut)
+Wszystkie przyciski używają **pill-shaped design** (border-radius: 980px):
+- **Primary** (`#007AFF`) - główne akcje (wybór pliku, zatwierdź)
+- **Secondary** (`rgba(142, 142, 147, 0.12)`) - akcje pomocnicze (zacznij od nowa)
+- **Success** (`#34C759`) - akcje zapisu (pobierz plik)
+- Efekt hover: zmiana opacity (0.85) zamiast koloru
+- Brak cieni – minimalistyczny flat design
+
+#### Pola Podglądu
+- **preview-field**: Klikalne pole z wartością
+  - Padding: 12px
+  - Border-radius: 8px
+  - Hover: `rgba(0, 0, 0, 0.04)` background
+  - Selected: `rgba(0, 122, 255, 0.1)` background
+- **preview-label**: Etykieta w stylu Apple
+  - Font-size: 13px
+  - Color: `#8E8E93` (text-secondary)
+  - Text-transform: uppercase
+  - Font-weight: 500
+- **preview-value**: Wartość pola
+  - Font-size: 17px
+  - Color: `#000000`
+  - Word-break: break-word
+
+#### Panel Edycji
+- Border: `1px solid var(--separator)`
+- Border-radius: 12px
+- Padding: 24px
+- Background: white
+- Max-height: 600px z scrollem
+
+#### Formularze
+- **Input fields**: 
+  - Border: 1px solid separator
+  - Border-radius: 8px
+  - Padding: 10px 12px
+  - Focus: niebieska ramka + shadow `rgba(0, 122, 255, 0.1)`
+- **Textarea**: 
+  - Font: SF Mono (monospace)
+  - Min-height: 80px
+  - Resize: vertical
 
 #### Animacje
 - **fadeIn** - płynne pojawianie się sekcji
-- **slideIn/slideOut** - komunikaty systemowe
-- **hover effects** - interaktywne podświetlenia
+- **slideIn** - komunikaty systemowe (z góry, 300ms ease)
+- **hover effects** - subtelne podświetlenia (0.2s ease)
+- **scrollIntoView** - płynne przewijanie do wybranego elementu
+- Brak nadmiarowych animacji - zasada "less is more"
 
 ## 🔒 Bezpieczeństwo
 
