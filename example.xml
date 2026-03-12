@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteka nazwa="Biblioteka Miejska" miasto="Warszawa">
+    <ksiazka id="1" dostepna="tak" isbn="978-83-283-1234-5">
+        <tytul>Programowanie w JavaScript</tytul>
+        <autor imie="Jan" nazwisko="Kowalski"/>
+        <wydawnictwo>Helion</wydawnictwo>
+        <rok>2024</rok>
+        <kategoria>Informatyka</kategoria>
+        <opis>Kompleksowy przewodnik po nowoczesnym JavaScript, obejmujący ES6+, async/await, i najlepsze praktyki programowania.</opis>
+        <cena waluta="PLN">89.99</cena>
+    </ksiazka>
+    <ksiazka id="2" dostepna="nie" isbn="978-83-283-5678-9">
+        <tytul>Wprowadzenie do Sztucznej Inteligencji</tytul>
+        <autor imie="Anna" nazwisko="Nowak"/>
+        <wydawnictwo>PWN</wydawnictwo>
+        <rok>2023</rok>
+        <kategoria>Sztuczna Inteligencja</kategoria>
+        <opis>Podstawy uczenia maszynowego, sieci neuronowe i praktyczne zastosowania AI w różnych dziedzinach.</opis>
+        <cena waluta="PLN">129.99</cena>
+    </ksiazka>
+    <ksiazka id="3" dostepna="tak" isbn="978-83-283-9012-3">
+        <tytul>Czysty Kod</tytul>
+        <autor imie="Robert" nazwisko="Martin"/>
+        <wydawnictwo>Helion</wydawnictwo>
+        <rok>2022</rok>
+        <kategoria>Inżynieria Oprogramowania</kategoria>
+        <opis>Podręcznik dobrych praktyk programistycznych. Jak pisać kod, który jest czytelny, testowalny i łatwy w utrzymaniu.</opis>
+        <cena waluta="PLN">79.99</cena>
+    </ksiazka>
+    <czasopismo id="4" typ="miesięcznik">
+        <tytul>IT Professional</tytul>
+        <wydawca>TechMedia</wydawca>
+        <numer>3</numer>
+        <rok>2024</rok>
+        <tematyka>Technologie informatyczne</tematyka>
+    </czasopismo>
+</biblioteka>
