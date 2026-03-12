@@ -192,10 +192,10 @@ function parseAndDisplayXML(xmlText) {
         // Wyświetl nawę pliku
         document.getElementById('file-name-display').textContent = AppState.originalFileName;
         
-        console.log('Building tree view');
-        // Zbuduj widok drzewa
-        buildTreeView();
-        console.log('Tree view built successfully');
+        console.log('Building preview');
+        // Zbuduj podgląd formularza
+        buildPreview();
+        console.log('Preview built successfully');
         
     } catch (error) {
         console.error('Error parsing XML:', error);
@@ -204,7 +204,175 @@ function parseAndDisplayXML(xmlText) {
 }
 
 /**
- * Buduje widok drzewa XML
+ * Buduje podgląd formularza XML
+ */
+function buildPreview() {
+    console.log('buildPreview called');
+    const treeView = document.getElementById('tree-view');
+    console.log('tree-view element:', treeView);
+    treeView.innerHTML = '';
+    
+    const rootElement = AppState.xmlDocument.documentElement;
+    console.log('Root element:', rootElement);
+    
+    // Przejdź przez wszystkie elementy i wyświetl je jako formularz
+    processElementForPreview(rootElement, treeView);
+    console.log('Preview built');
+}
+
+/**
+ * Przetwarza element XML i tworzy podgląd formularza
+ */
+function processElementForPreview(element, container, path = '') {
+    const currentPath = path ? `${path} > ${element.tagName}` : element.tagName;
+    
+    // Jeśli element ma dzieci, sprawdź czy są to elementy czy tekst
+    const children = Array.from(element.children);
+    const textContent = getNodeTextContent(element);
+    
+    if (children.length === 0 && textContent) {
+        // Liść z wartością - wyświetl jako pole formularza
+        createPreviewField(element, container, currentPath);
+    } else if (children.length > 0) {
+        // Element z dziećmi - sprawdź czy to sekcja czy pojedyncze pole
+        const firstChild = children[0];
+        const allChildrenSameTag = children.every(child => child.tagName === firstChild.tagName);
+        
+        if (allChildrenSameTag && children.length > 1) {
+            // Lista powtarzających się elementów - traktuj jako sekcję
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'preview-section';
+            
+            const sectionTitle = document.createElement('div');
+            sectionTitle.className = 'preview-section-title';
+            sectionTitle.textContent = formatLabel(element.tagName);
+            sectionDiv.appendChild(sectionTitle);
+            
+            children.forEach((child, index) => {
+                const itemTitle = document.createElement('div');
+                itemTitle.className = 'preview-section-title';
+                itemTitle.style.fontSize = '15px';
+                itemTitle.style.marginTop = '16px';
+                itemTitle.textContent = `${formatLabel(child.tagName)} ${index + 1}`;
+                sectionDiv.appendChild(itemTitle);
+                
+                processElementForPreview(child, sectionDiv, currentPath);
+            });
+            
+            container.appendChild(sectionDiv);
+        } else {
+            // Różne dzieci - przetwórz każde
+            if (path) {
+                // Dodaj tytuł sekcji
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'preview-section';
+                
+                const sectionTitle = document.createElement('div');
+                sectionTitle.className = 'preview-section-title';
+                sectionTitle.textContent = formatLabel(element.tagName);
+                sectionDiv.appendChild(sectionTitle);
+                
+                children.forEach(child => {
+                    processElementForPreview(child, sectionDiv, currentPath);
+                });
+                
+                container.appendChild(sectionDiv);
+            } else {
+                // Element główny - przetwórz dzieci bez dodatkowego tytułu
+                children.forEach(child => {
+                    processElementForPreview(child, container, currentPath);
+                });
+            }
+        }
+    }
+    
+    // Jeśli element ma atrybuty, wyświetl je też
+    if (element.attributes && element.attributes.length > 0) {
+        Array.from(element.attributes).forEach(attr => {
+            createPreviewFieldForAttribute(element, attr, container, currentPath);
+        });
+    }
+}
+
+/**
+ * Tworzy pole podglądu dla elementu
+ */
+function createPreviewField(element, container, path) {
+    const uid = generateUID();
+    AppState.nodeMap.set(uid, element);
+    
+    const fieldDiv = document.createElement('div');
+    fieldDiv.className = 'preview-field';
+    fieldDiv.dataset.uid = uid;
+    fieldDiv.onclick = () => selectNode(uid);
+    
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'preview-label';
+    labelDiv.textContent = formatLabel(element.tagName);
+    fieldDiv.appendChild(labelDiv);
+    
+    const valueDiv = document.createElement('div');
+    valueDiv.className = 'preview-value';
+    const textContent = getNodeTextContent(element);
+    
+    if (textContent) {
+        if (textContent.length > 200) {
+            valueDiv.classList.add('preview-value-code');
+        }
+        valueDiv.textContent = textContent;
+    } else {
+        valueDiv.textContent = '(pusta wartość)';
+        valueDiv.classList.add('empty');
+    }
+    
+    fieldDiv.appendChild(valueDiv);
+    container.appendChild(fieldDiv);
+}
+
+/**
+ * Tworzy pole podglądu dla atrybutu
+ */
+function createPreviewFieldForAttribute(element, attr, container, path) {
+    const uid = generateUID();
+    AppState.nodeMap.set(uid, { element, attribute: attr.name });
+    
+    const fieldDiv = document.createElement('div');
+    fieldDiv.className = 'preview-field';
+    fieldDiv.dataset.uid = uid;
+    fieldDiv.onclick = () => selectNode(uid);
+    
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'preview-label';
+    labelDiv.textContent = `${formatLabel(element.tagName)} > ${attr.name}`;
+    fieldDiv.appendChild(labelDiv);
+    
+    const valueDiv = document.createElement('div');
+    valueDiv.className = 'preview-value';
+    valueDiv.textContent = attr.value || '(pusta wartość)';
+    if (!attr.value) valueDiv.classList.add('empty');
+    
+    fieldDiv.appendChild(valueDiv);
+    container.appendChild(fieldDiv);
+}
+
+/**
+ * Formatuje etykietę (zamienia camelCase, snake_case na czytelny tekst)
+ */
+function formatLabel(text) {
+    // Usuń znaki specjalne
+    text = text.replace(/[_-]/g, ' ');
+    
+    // Zamień camelCase na spacje
+    text = text.replace(/([a-z])([A-Z])/g, '$1 $2');
+    
+    // Pierwsza litera wielka
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+    
+    return text;
+}
+
+/**
+ * Buduje widok drzewa XML (stara funkcja - backup)
  */
 function buildTreeView() {
     console.log('buildTreeView called');
@@ -333,7 +501,7 @@ function generateUID() {
  */
 function selectNode(uid) {
     // Usuń poprzednie zaznaczenie
-    const previousSelected = document.querySelector('.tree-node.selected');
+    const previousSelected = document.querySelector('.preview-field.selected, .tree-node.selected');
     if (previousSelected) {
         previousSelected.classList.remove('selected');
     }
@@ -342,12 +510,17 @@ function selectNode(uid) {
     const nodeDiv = document.querySelector(`[data-uid="${uid}"]`);
     if (nodeDiv) {
         nodeDiv.classList.add('selected');
+        
+        // Przewiń do elementu jeśli jest poza widokiem
+        nodeDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     
     // Zapisz wybrany węzeł
+    const nodeData = AppState.nodeMap.get(uid);
     AppState.selectedNode = {
         uid: uid,
-        xmlNode: AppState.nodeMap.get(uid)
+        xmlNode: nodeData.element || nodeData, // Obsługa zarówno elementów jak i atrybutów
+        attribute: nodeData.attribute || null
     };
     
     // Pokaż panel edycji
@@ -360,6 +533,7 @@ function selectNode(uid) {
 function displayEditPanel() {
     const editPanel = document.getElementById('edit-panel');
     const xmlNode = AppState.selectedNode.xmlNode;
+    const attribute = AppState.selectedNode.attribute;
     
     if (!xmlNode) {
         editPanel.innerHTML = '<p class="placeholder-message">Kliknij na element po lewej stronie, aby go edytować</p>';
@@ -371,6 +545,29 @@ function displayEditPanel() {
     const form = document.createElement('div');
     form.className = 'edit-form';
     
+    // Jeśli wybrano atrybut, pokaż tylko edycję atrybutu
+    if (attribute) {
+        const header = document.createElement('h3');
+        header.textContent = `Edycja atrybutu: ${attribute}`;
+        form.appendChild(header);
+        
+        const attrValue = xmlNode.getAttribute(attribute) || '';
+        const attrGroup = createFormGroup(
+            'Wartość:',
+            'input',
+            attrValue,
+            (value) => {
+                xmlNode.setAttribute(attribute, value);
+                showMessage('Atrybut zaktualizowany', 'success');
+                buildPreview(); // Odśwież podgląd
+            }
+        );
+        form.appendChild(attrGroup);
+        
+        editPanel.appendChild(form);
+        return;
+    }
+    
     // Nagłówek
     const header = document.createElement('h3');
     header.textContent = `Edycja: <${xmlNode.tagName}>`;
@@ -380,10 +577,13 @@ function displayEditPanel() {
     const textContent = getNodeTextContent(xmlNode);
     if (textContent || xmlNode.children.length === 0) {
         const textGroup = createFormGroup(
-            'Zawartość tekstowa:',
+            'Zawartość:',
             'textarea',
             textContent,
-            (value) => updateNodeTextContent(xmlNode, value)
+            (value) => {
+                updateNodeTextContent(xmlNode, value);
+                buildPreview(); // Odśwież podgląd
+            }
         );
         form.appendChild(textGroup);
     }
@@ -478,7 +678,7 @@ function createAttributeItem(xmlNode, attrName, attrValue) {
     removeBtn.onclick = () => {
         xmlNode.removeAttribute(attrName);
         item.remove();
-        buildTreeView();
+        buildPreview();
         showMessage('Atrybut usunięty', 'success');
     };
     
@@ -499,7 +699,7 @@ function addNewAttribute(xmlNode, attrList) {
     const attrItem = createAttributeItem(xmlNode, newAttrName, '');
     attrList.appendChild(attrItem);
     
-    buildTreeView();
+    buildPreview();
     showMessage('Nowy atrybut dodany', 'success');
 }
 
@@ -520,7 +720,7 @@ function updateNodeTextContent(xmlNode, newValue) {
         xmlNode.appendChild(textNode);
     }
     
-    buildTreeView();
+    buildPreview();
 }
 
 /**
@@ -531,7 +731,7 @@ function updateAttributeName(xmlNode, oldName, newName) {
         const value = xmlNode.getAttribute(oldName);
         xmlNode.removeAttribute(oldName);
         xmlNode.setAttribute(newName, value);
-        buildTreeView();
+        buildPreview();
         displayEditPanel();
         showMessage('Nazwa atrybutu zmieniona', 'success');
     }
@@ -542,7 +742,7 @@ function updateAttributeName(xmlNode, oldName, newName) {
  */
 function updateAttributeValue(xmlNode, attrName, newValue) {
     xmlNode.setAttribute(attrName, newValue);
-    buildTreeView();
+    buildPreview();
     showMessage('Wartość atrybutu zmieniona', 'success');
 }
 

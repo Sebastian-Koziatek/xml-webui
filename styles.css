@@ -211,7 +211,7 @@ header h1 {
     gap: 22px;
 }
 
-/* ===== Tree View ===== */
+/* ===== Tree View / Preview ===== */
 .tree-view {
     background: var(--white);
     border: 1px solid var(--separator);
@@ -239,6 +239,67 @@ header h1 {
     background: rgba(0, 0, 0, 0.3);
 }
 
+/* Podgląd jako formularz */
+.preview-section {
+    margin-bottom: 24px;
+}
+
+.preview-section-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    letter-spacing: -0.022em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--separator);
+}
+
+.preview-field {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.preview-field:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.preview-field.selected {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.preview-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    letter-spacing: -0.022em;
+    text-transform: uppercase;
+}
+
+.preview-value {
+    font-size: 17px;
+    color: var(--text-color);
+    word-break: break-word;
+}
+
+.preview-value.empty {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.preview-value-code {
+    font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    font-size: 14px;
+    background: var(--bg-color);
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 4px;
+}
+
+/* Stary tree view - zostaje jako fallback */
 .tree-node {
     margin: 2px 0;
     padding: 8px 12px;
